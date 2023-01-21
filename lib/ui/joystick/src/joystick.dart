@@ -73,6 +73,7 @@ class _JoyStickState extends State<JoyStick> {
   void _onEnd(DragEndDetails data) {
     setState(() {
       _stickOffset = Offset.zero;
+      event = JoystickEvent.standby;
     });
   }
 
@@ -83,6 +84,7 @@ class _JoyStickState extends State<JoyStick> {
       children: [
         JoystickBase(
           key: _baseKey,
+          event: event,
         ),
         GestureDetector(
           onPanStart: _onStart,

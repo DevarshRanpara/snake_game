@@ -1,5 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.devarsh.thesnake.snake_game">
+    <uses-permission android:name="android.permission.VIBRATE"/>
    <application
         android:label="snake_game"
         android:name="${applicationName}"

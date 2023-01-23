@@ -12,6 +12,12 @@ dependencies:
   flutter:
     sdk: flutter
   vibration: ^1.7.6
+  flame: ^1.6.0
+  event_bus: ^2.0.0
+  lucide_icons: ^0.105.0
+  get_it: ^7.2.0
 
 dev_dependencies:
   flutter_lints: ^2.0.0
+flutter:
+  uses-material-design: true

@@ -6,8 +6,8 @@ class Stick extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 76,
-      width: 76,
+      height: 82,
+      width: 82,
       decoration: BoxDecoration(
         color: const Color(0xFFC4C4C4),
         borderRadius: const BorderRadius.all(Radius.circular(100)),

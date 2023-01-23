@@ -1,22 +1,22 @@
 import 'package:flutter/material.dart';
 
-import 'joystick_event.dart';
+import '../../utils/enums/direction_enum.dart';
 
 class JoystickBase extends StatelessWidget {
-  final JoystickEvent event;
+  final SnakeEvent event;
   const JoystickBase({super.key, required this.event});
 
   double _passArcValue() {
     switch (event) {
-      case JoystickEvent.top:
+      case SnakeEvent.top:
         return ArcValue.top;
-      case JoystickEvent.bottom:
+      case SnakeEvent.bottom:
         return ArcValue.bottom;
-      case JoystickEvent.left:
+      case SnakeEvent.left:
         return ArcValue.left;
-      case JoystickEvent.right:
+      case SnakeEvent.right:
         return ArcValue.right;
-      case JoystickEvent.standby:
+      case SnakeEvent.standby:
         return 0;
       default:
         return 0;
@@ -31,7 +31,7 @@ class JoystickBase extends StatelessWidget {
       decoration: BoxDecoration(
           color: const Color(0xFFC5C5C5).withOpacity(0.5),
           shape: BoxShape.circle),
-      child: event != JoystickEvent.standby
+      child: event != SnakeEvent.standby
           ? CustomPaint(
               painter: ShowArc(_passArcValue()),
             )

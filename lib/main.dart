@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 
-import 'ui/views/home_screen.dart';
+import 'ui/views/game_screen.dart';
+import 'utils/service_locator.dart';
 
 void main() {
+  ServiceLocator.init();
   runApp(const MyApp());
 }
 

@@ -10,6 +10,7 @@ import '../../utils/enums/direction_enum.dart';
 import '../../utils/event_bus/classes/snake_game_over.dart';
 import '../../utils/event_bus/event_bus_helper.dart';
 import '../joystick/joystick.dart';
+import '../widgets/score_text.dart';
 import 'game_over.dart';
 
 class GameScreen extends StatefulWidget {
@@ -51,13 +52,7 @@ class _GameScreenState extends State<GameScreen> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const Text(
-                        '000000',
-                        style: TextStyle(
-                          fontSize: 24,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
+                      const ScoreText(),
                       Row(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: const [

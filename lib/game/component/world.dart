@@ -10,6 +10,7 @@ import '../config/game_config.dart';
 import '../config/styles.dart';
 import '../snake/command_queue.dart';
 import '../snake/grid.dart';
+import '../snake/score_manager.dart';
 import '../snake/snake.dart';
 import '../snake_game.dart';
 import 'cell.dart';
@@ -20,6 +21,7 @@ class World extends DynamicFpsPositionComponent with HasGameRef<SnakeGame> {
   final Snake _snake = Snake();
   final CommandQueue _commandQueue = GetIt.I.get<CommandQueue>();
   final EventBusHelper _eventBusHelper = GetIt.I.get<EventBusHelper>();
+  final ScoreManager _scoreManager = ScoreManager();
 
   bool gameOver = false;
 
@@ -40,6 +42,7 @@ class World extends DynamicFpsPositionComponent with HasGameRef<SnakeGame> {
           _eventBusHelper.eventBus.fire(SnakeGameOver());
         } else {
           if (nextCell.cellType == CellType.food) {
+            _scoreManager.increment();
             _snake.grow(nextCell);
             _grid.generateFood();
           } else {

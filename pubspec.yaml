@@ -16,6 +16,7 @@ dependencies:
   event_bus: ^2.0.0
   lucide_icons: ^0.105.0
   get_it: ^7.2.0
+  shared_preferences: ^2.0.17
 
 dev_dependencies:
   flutter_lints: ^2.0.0

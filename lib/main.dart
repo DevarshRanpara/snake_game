@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 
 import 'ui/views/game_screen.dart';
 import 'utils/service_locator.dart';
+import 'utils/snake_store.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   ServiceLocator.init();
+  await GetIt.I.get<SnakeStore>().init();
   runApp(const MyApp());
 }
 

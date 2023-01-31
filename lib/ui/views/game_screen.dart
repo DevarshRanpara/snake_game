@@ -19,7 +19,7 @@ class GameScreen extends StatefulWidget {
 }
 
 class _GameScreenState extends State<GameScreen> {
-  final DeBouncer _searchDeBouncer = DeBouncer(milliseconds: 0);
+  final DeBouncer _searchDeBouncer = DeBouncer(milliseconds: 70);
   SnakeEvent classEvent = SnakeEvent.standby;
   final CommandQueue _commandQueue = GetIt.I.get<CommandQueue>();
 

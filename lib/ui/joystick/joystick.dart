@@ -24,6 +24,9 @@ class _JoyStickState extends State<JoyStick> {
   SnakeEvent event = SnakeEvent.standby;
 
   void _getEvent() {
+    if(_stickOffset.distance <= 0.5) {
+      return;
+    }
     double dx = _stickOffset.dx;
     double dy = _stickOffset.dy;
     SnakeEvent currentEvent = SnakeEvent.standby;

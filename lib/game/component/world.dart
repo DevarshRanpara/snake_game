@@ -4,6 +4,8 @@ import 'package:flame/components.dart';
 import 'package:get_it/get_it.dart';
 
 import '../../utils/enums/direction_enum.dart';
+import '../../utils/event_bus/classes/snake_game_over.dart';
+import '../../utils/event_bus/event_bus_helper.dart';
 import '../config/game_config.dart';
 import '../config/styles.dart';
 import '../snake/command_queue.dart';
@@ -13,14 +15,11 @@ import '../snake_game.dart';
 import 'cell.dart';
 import 'dynamic_fps_position_component.dart';
 
-import 'package:event_bus/event_bus.dart';
-
-EventBus eventBus = EventBus();
-
 class World extends DynamicFpsPositionComponent with HasGameRef<SnakeGame> {
   final Grid _grid;
   final Snake _snake = Snake();
   final CommandQueue _commandQueue = GetIt.I.get<CommandQueue>();
+  final EventBusHelper _eventBusHelper = GetIt.I.get<EventBusHelper>();
 
   bool gameOver = false;
 
@@ -38,7 +37,7 @@ class World extends DynamicFpsPositionComponent with HasGameRef<SnakeGame> {
       if (nextCell != Grid.border) {
         if (_snake.checkCrash(nextCell)) {
           gameOver = true;
-          eventBus.fire(SnakeGameOver());
+          _eventBusHelper.eventBus.fire(SnakeGameOver());
         } else {
           if (nextCell.cellType == CellType.food) {
             _snake.grow(nextCell);
@@ -49,7 +48,7 @@ class World extends DynamicFpsPositionComponent with HasGameRef<SnakeGame> {
         }
       } else {
         gameOver = true;
-        eventBus.fire(SnakeGameOver());
+        _eventBusHelper.eventBus.fire(SnakeGameOver());
       }
     }
   }
@@ -101,5 +100,3 @@ class World extends DynamicFpsPositionComponent with HasGameRef<SnakeGame> {
     return _grid.findCell(column, row);
   }
 }
-
-class SnakeGameOver {}

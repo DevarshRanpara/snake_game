@@ -3,11 +3,12 @@ import 'package:flame/game.dart';
 import 'package:get_it/get_it.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 
-import '../../game/component/world.dart';
 import '../../game/snake/command_queue.dart';
 import '../../game/snake_game.dart';
 import '../../utils/de_bouncer.dart';
 import '../../utils/enums/direction_enum.dart';
+import '../../utils/event_bus/classes/snake_game_over.dart';
+import '../../utils/event_bus/event_bus_helper.dart';
 import '../joystick/joystick.dart';
 import 'game_over.dart';
 
@@ -22,11 +23,12 @@ class _GameScreenState extends State<GameScreen> {
   final DeBouncer _searchDeBouncer = DeBouncer(milliseconds: 70);
   SnakeEvent classEvent = SnakeEvent.standby;
   final CommandQueue _commandQueue = GetIt.I.get<CommandQueue>();
+  final EventBusHelper _eventBusHelper = GetIt.I.get<EventBusHelper>();
 
   @override
   void initState() {
     super.initState();
-    eventBus.on<SnakeGameOver>().listen((event) {
+    _eventBusHelper.eventBus.on<SnakeGameOver>().listen((event) {
       Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) {
         return const GameOver();
       }));

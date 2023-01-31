@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'game_screen.dart';
-
-
 class GameOver extends StatelessWidget {
   const GameOver({super.key});
 
@@ -12,16 +9,7 @@ class GameOver extends StatelessWidget {
       backgroundColor: const Color(0xFF333333),
       body: Center(
         child: InkWell(
-          onTap: () {
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(
-                builder: (_) {
-                  return const GameScreen();
-                },
-              ),
-            );
-          },
+          onTap: () => Navigator.pop(context),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -45,9 +33,10 @@ class GameOver extends StatelessWidget {
               Text(
                 'Tap to Retry',
                 style: TextStyle(
-                    fontSize: 12,
-                    fontWeight: FontWeight.w900,
-                    color: Colors.white),
+                  fontSize: 12,
+                  fontWeight: FontWeight.w900,
+                  color: Colors.white,
+                ),
               ),
             ],
           ),

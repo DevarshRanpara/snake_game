@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flame/game.dart';
 import 'package:get_it/get_it.dart';
-import 'package:lucide_icons/lucide_icons.dart';
 
 import '../../game/snake/command_queue.dart';
 import '../../game/snake_game.dart';
@@ -26,14 +25,24 @@ class _GameScreenState extends State<GameScreen> {
   SnakeEvent classEvent = SnakeEvent.standby;
   final CommandQueue _commandQueue = GetIt.I.get<CommandQueue>();
   final EventBusHelper _eventBusHelper = GetIt.I.get<EventBusHelper>();
+  SnakeGame _game = SnakeGame();
 
   @override
   void initState() {
     super.initState();
-    _eventBusHelper.eventBus.on<SnakeGameOver>().listen((event) {
-      Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) {
-        return const GameOver();
-      }));
+    _eventBusHelper.eventBus.on<SnakeGameOver>().listen(
+          (event) => showGameOver(),
+        );
+  }
+
+  void showGameOver() async {
+    await showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (_) => const GameOver(),
+    );
+    setState(() {
+      _game = SnakeGame();
     });
   }
 
@@ -65,9 +74,7 @@ class _GameScreenState extends State<GameScreen> {
                       borderRadius: BorderRadius.all(Radius.circular(8))),
                   height: MediaQuery.of(context).size.width - 64,
                   width: MediaQuery.of(context).size.width - 64,
-                  child: const GameWidget.controlled(
-                    gameFactory: SnakeGame.new,
-                  ),
+                  child: GameWidget(game: _game),
                 )
               ],
             ),

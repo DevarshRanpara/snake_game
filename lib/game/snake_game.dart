@@ -8,7 +8,7 @@ import 'snake/offsets.dart';
 
 class SnakeGame extends FlameGame {
   Grid grid = Grid(GameConfig.rows, GameConfig.columns, GameConfig.cellSize);
-  World? world;
+  World? snakeWorld;
   OffSets offSets = OffSets(Vector2.zero());
 
   @override
@@ -26,7 +26,7 @@ class SnakeGame extends FlameGame {
     }
     grid.generateFood();
 
-    world = World(grid);
-    add(world!);
+    snakeWorld = World(grid);
+    add(world);
   }
 }

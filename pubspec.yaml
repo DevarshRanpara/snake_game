@@ -11,14 +11,14 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  vibration: ^1.7.6
-  flame: ^1.6.0
+  vibration: ^1.8.4
+  flame: ^1.15.0
   event_bus: ^2.0.0
-  lucide_icons: ^0.105.0
-  get_it: ^7.2.0
-  shared_preferences: ^2.0.17
+  lucide_icons: ^0.257.0
+  get_it: ^7.6.7
+  shared_preferences: ^2.2.2
 
 dev_dependencies:
-  flutter_lints: ^2.0.0
+  flutter_lints: ^3.0.1
 flutter:
   uses-material-design: true

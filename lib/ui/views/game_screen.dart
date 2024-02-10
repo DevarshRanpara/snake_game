@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:flame/game.dart';
+import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 
 import '../../game/snake/command_queue.dart';
@@ -21,7 +21,7 @@ class GameScreen extends StatefulWidget {
 }
 
 class _GameScreenState extends State<GameScreen> {
-  final DeBouncer _searchDeBouncer = DeBouncer(milliseconds: 10);
+  final DeBouncer _snakeDeBouncer = DeBouncer(milliseconds: 10);
   SnakeEvent classEvent = SnakeEvent.standby;
   final CommandQueue _commandQueue = GetIt.I.get<CommandQueue>();
   final EventBusHelper _eventBusHelper = GetIt.I.get<EventBusHelper>();
@@ -57,11 +57,11 @@ class _GameScreenState extends State<GameScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 32),
+                const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 32),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: const [
+                    children: [
                       ScoreText(),
                       HighScore(),
                     ],
@@ -70,11 +70,19 @@ class _GameScreenState extends State<GameScreen> {
                 const SizedBox(height: 16),
                 Container(
                   decoration: const BoxDecoration(
-                      color: Colors.red,
-                      borderRadius: BorderRadius.all(Radius.circular(8))),
+                    color: Colors.red,
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(8),
+                    ),
+                  ),
                   height: MediaQuery.of(context).size.width - 64,
                   width: MediaQuery.of(context).size.width - 64,
-                  child: GameWidget(game: _game),
+                  child: GameWidget(
+                    game: _game,
+                    errorBuilder: (context, error) {
+                      return Container();
+                    },
+                  ),
                 )
               ],
             ),
@@ -82,7 +90,7 @@ class _GameScreenState extends State<GameScreen> {
               child: JoyStick(
                 onPositionUpdate: (event) {
                   classEvent = event;
-                  _searchDeBouncer.run(() {
+                  _snakeDeBouncer.run(() {
                     _commandQueue.add(event);
                   });
                 },
